@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 Language?
 Who's doing what?
-=======
-Language?
-Who's doing what?
->>>>>>> 62b6fe1 (Started project. Added Rubric.txt and outline.txt)
 How are we doing each thing?
