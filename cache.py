@@ -43,6 +43,8 @@ def populateCache(data, spot):
     # if the data is already in the cache, don't add it again
     for i in range(len(cache[spot])):
         if cache[spot][i] == data:
+            cache[spot].pop(i)
+            cache[spot].append(data)
             hit += 1
             return cache
         else:
