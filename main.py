@@ -33,30 +33,28 @@ def main():
         realSize : int = (nom_size + num_block*((tag + 1)//8))//(2^10)  # solves for the real size in kilobytes
         print(nom_size,words_per_block, mapping_policy, bytesPerBlock, num_block, index_bits, offset_bits, tag, realSize)
 
+    if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
+        promptMode()
+    else:
+        simMode()
 
     
     
     # This is me f*ing around with the input loop
+
+def promptMode():
     while (True):
         temp = input("Input a word")
         try:
             int(temp)
+            ## call program
         except ValueError:
-            sys.stdout.write("Exiting Program")
-            sys.stdout.flush()
-            time.sleep(0.5)
-            sys.stdout.write(".")
-            sys.stdout.flush()
-            time.sleep(0.6)
-            sys.stdout.write(".")
-            sys.stdout.flush()
-            time.sleep(0.7)
-            sys.stdout.write(".")
-            sys.stdout.flush()
-            time.sleep(0.5)
+            sys.stdout.write("Exiting Program...")
             print("\nThank You :)")
             exit(99)
     
+def simMode():
+    return 0
 
 if __name__ == '__main__':
     main()
