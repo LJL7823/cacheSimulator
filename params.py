@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class parameterClass:
     nom_size : int
     words_per_block : int
-    mapping_policy : int
+    mapping_policy : str
     theN : int
     bytesPerBlock : int
     num_block : int
