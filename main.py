@@ -1,6 +1,7 @@
 #from cache_classes import *
 import time
 import sys
+import math as m
 
 def main():
     print("Cache Simulator by Ruhan, Maya, Key'Mon, and Liam \n\n")
@@ -14,7 +15,15 @@ def main():
         print(size,words_per_block, mapping_policy, blocks_per_set)
     else:
         # Should be replaced with the create of the cache
-        print(size,words_per_block, mapping_policy)
+        bytesPerBlock = 4 * words_per_block # solves for the number of the bytes per block
+        num_block = (size/bytesPerBlock)   # number of blocks 
+        index_bits = m.log2(num_block)   # the index in bits 
+        offset_bits = m.log2(bytesPerBlock)  # the offset in bits 
+        tag = 32 - (index_bits + offset_bits)   # the tag in bits
+        realSize = (size + num_block*((tag + 1)/8))/(2^10)  # solves for the real size in kilobytes
+        print(size,words_per_block, mapping_policy, bytesPerBlock, num_block, index_bits, offset_bits, tag, realSize)
+
+
     
     
     # This is me f*ing around with the input loop
