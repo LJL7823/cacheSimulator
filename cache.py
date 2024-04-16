@@ -4,35 +4,36 @@
 '''
 
 # cache memory to store the data and it's place in memory
-cache = [dict(int, [])]
+cache = [dict()]
 
-''' 
-    populate the cache memory with the data and it's place in memory
-    cache = dict() with key = int, value = data
-    @vars
-    data = dict() with key = block_address value = word_addresses
-    spot = spot in memory to place the data
-
-    @return
-    cache = dict() with key = int, value = data
-'''
 def populateCache(data, spot):
+    ''' 
+        populate the cache memory with the data and it's place in memory
+        cache = dict() with key = int, value = data
+        @vars
+        data = dict() with key = block_address value = word_addresses
+        spot = spot in memory to place the data
+
+        @return
+        cache = dict() with key = int, value = data
+    '''
     global cache
     cache[spot] = data
     return cache
 
-''' 
-    find the word addresses in cache based on the number of ways
-    @vars
-    block_address = the block address
-    word_address = the word address
-    words_per_block = the number of words per block
-    N = the number of ways
 
-    @return
-    word_addresses = the word addresses in cache based on the number of ways
-'''
 def findWordAddresses(block_address, word_address, words_per_block, N):
+    ''' 
+        find the word addresses in cache based on the number of ways
+        @vars
+        block_address = the block address
+        word_address = the word address
+        words_per_block = the number of words per block
+        N = the number of ways
+
+        @return
+        word_addresses = the word addresses in cache based on the number of ways
+    '''
 
     # find the block address
     block_address = word_address // words_per_block
@@ -67,17 +68,18 @@ def findWordAddresses(block_address, word_address, words_per_block, N):
             print("Number of ways not supported")
     return word_addresses
 
-''' 
-    find the spot in cache based on the number of ways
-    @vars
-    block_address = the block address
-    num_blocks = the number of blocks in cache
-    N = the number of ways
 
-    @return
-    spot = the spot in cache to place the data
-    '''
 def findSpotInCache(block_address, num_blocks, N):
+    ''' 
+        find the spot in cache based on the number of ways
+        @vars
+        block_address = the block address
+        num_blocks = the number of blocks in cache
+        N = the number of ways
+
+        @return
+        spot = the spot in cache to place the data
+    '''
 
     # get the spot in cache based on the number of ways
     spot = -1
