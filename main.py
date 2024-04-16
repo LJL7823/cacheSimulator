@@ -16,7 +16,7 @@ def main():
         # Should be replaced with the create of the cache
         print(size,words_per_block, mapping_policy)
     """
-    
+    ;
     # This is me f*ing around with the input loop
     while (True):
         temp = input("Input a word")
