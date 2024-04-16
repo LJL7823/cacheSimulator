@@ -103,9 +103,10 @@ def findWordAddresses(block_address, word_address, words_per_block, N):
         case _:
             print("Number of ways not supported")
 
-    data
+    if data.get(block_address) is None:
+        data = {block_address: word_addresses}
 
-    return word_addresses
+    return data
 
 
 def findIndex(block_address, num_blocks, N):
