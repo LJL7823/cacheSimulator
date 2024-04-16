@@ -15,12 +15,12 @@ def main():
         print(size,words_per_block, mapping_policy, blocks_per_set)
     else:
         # Should be replaced with the create of the cache
-        bytesPerBlock = 4 * words_per_block # solves for the number of the bytes per block
-        num_block = (size/bytesPerBlock)   # number of blocks 
-        index_bits = m.log2(num_block)   # the index in bits 
-        offset_bits = m.log2(bytesPerBlock)  # the offset in bits 
-        tag = 32 - (index_bits + offset_bits)   # the tag in bits
-        realSize = (size + num_block*((tag + 1)/8))/(2^10)  # solves for the real size in kilobytes
+        bytesPerBlock : int = 4 * words_per_block # solves for the number of the bytes per block
+        num_block : int = (size//bytesPerBlock)   # number of blocks 
+        index_bits : int = int(m.log2(num_block))   # the index in bits 
+        offset_bits :int  = int(m.log2(bytesPerBlock))  # the offset in bits 
+        tag : int = 32 - (index_bits + offset_bits)   # the tag in bits
+        realSize : int = (size + num_block*((tag + 1)//8))//(2^10)  # solves for the real size in kilobytes
         print(size,words_per_block, mapping_policy, bytesPerBlock, num_block, index_bits, offset_bits, tag, realSize)
 
 
