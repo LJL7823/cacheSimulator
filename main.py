@@ -1,4 +1,4 @@
-#from cache_classes import *
+# Import necessary modules and classes
 from gettext import find
 import time
 import sys
@@ -7,37 +7,42 @@ from cache import *
 from params import parameterClass
 
 def main():
-    """Main Method of the program does the I/O
-    """
+    """Main Method of the program does the I/O"""
     print("Cache Simulator by Ruhan, Maya, Key'Mon, and Liam \n\n")
-    # Prompts the user for each required input
+    
+    # Prompt the user for each required input
     nom_size: int = int(input("Input the Nominal Size of the cache in Bytes:")) # type: ignore
     words_per_block : int = int(input("Input the number of words per block (1, 2, 4, 8,...):")) # type: ignore
     mapping_policy : str = input("Mapping type Direct (D) or Set-Associative (S):")
+    
+    # If the mapping policy is Set-Associative
     if(mapping_policy == 'S' or mapping_policy == 's'):
         theN : int = int(input("input the number of blocks per set:")) # type: ignore
-        bytesPerBlock : int = 4 * words_per_block # solves for the number of the bytes per block
-        num_block : int = (nom_size//bytesPerBlock)   # number of blocks 
-        num_set : int = (num_block//theN)
-        index_bits :int = int(m.log2(num_set))
-        offset_bits :int  = int(m.log2(bytesPerBlock))  # the offset in bits 
-        tag : int = 32 - (index_bits + offset_bits)   # the tag in bits
-        stat : int = 1 + int(m.log2(theN))
-        realSize : int = (nom_size + num_block*((tag + stat)//8))//(2^10)  # solves for the real size in kilobytes
-        # Should be replace with the creation of the cache
+        bytesPerBlock : int = 4 * words_per_block # Calculate the number of bytes per block
+        num_block : int = (nom_size//bytesPerBlock)   # Calculate the number of blocks 
+        num_set : int = (num_block//theN) # Calculate the number of sets
+        index_bits :int = int(m.log2(num_set)) # Calculate the index bits
+        offset_bits :int  = int(m.log2(bytesPerBlock))  # Calculate the offset bits 
+        tag : int = 32 - (index_bits + offset_bits)   # Calculate the tag bits
+        stat : int = 1 + int(m.log2(theN)) # Calculate the stat
+        realSize : int = (nom_size + num_block*((tag + stat)//8))//(2^10)  # Calculate the real size in kilobytes
+        
+        # Create an instance of parameterClass with the calculated parameters
         our_Cache = parameterClass( nom_size, words_per_block, \
                                    mapping_policy, theN, bytesPerBlock, num_block,\
                                        num_block, num_set, index_bits, offset_bits, tag,\
                                            stat, realSize)
         print(nom_size,words_per_block, mapping_policy, num_set)
     else:
-        # Should be replaced with the create of the cache
-        bytesPerBlock : int = 4 * words_per_block # solves for the number of the bytes per block
-        num_block : int = int(nom_size//bytesPerBlock)   # number of blocks 
-        index_bits : int = int(m.log2(num_block))   # the index in bits 
-        offset_bits :int  = int(m.log2(bytesPerBlock))  # the offset in bits 
-        tag : int = 32 - (index_bits + offset_bits)   # the tag in bits
-        realSize : int = (nom_size + num_block*((tag + 1)//8))  # solves for the real size in kilobytes
+        # If the mapping policy is Direct
+        bytesPerBlock : int = 4 * words_per_block # Calculate the number of bytes per block
+        num_block : int = int(nom_size//bytesPerBlock)   # Calculate the number of blocks 
+        index_bits : int = int(m.log2(num_block))   # Calculate the index bits 
+        offset_bits :int  = int(m.log2(bytesPerBlock))  # Calculate the offset bits 
+        tag : int = 32 - (index_bits + offset_bits)   # Calculate the tag bits
+        realSize : int = (nom_size + num_block*((tag + 1)//8))  # Calculate the real size in kilobytes
+        
+        # Create an instance of parameterClass with the calculated parameters
         our_Cache = parameterClass( nom_size, words_per_block, mapping_policy, \
                                     1, bytesPerBlock, num_block,\
                                    num_block, index_bits, offset_bits, \
@@ -46,15 +51,13 @@ def main():
 
     print(our_Cache)
     
+    # Ask the user to choose between Prompt mode and Simulate mode
     if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
         promptMode()
     else:
         simMode()
 
-    
-    
-    # This is me f*ing around with the input loop
-
+# Function for Prompt mode
 def promptMode():
     while (True):
         temp = input("Input a word")
@@ -66,9 +69,10 @@ def promptMode():
             print("\nThank You :)")
             exit(99)
     
+# Function for Simulate mode
 def simMode():
     return 0
 
+# Call the main function
 if __name__ == '__main__':
     main()
-    
