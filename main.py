@@ -1,7 +1,9 @@
 #from cache_classes import *
+from gettext import find
 import time
 import sys
 import math as m
+from cache import *
 
 def main():
     """Main Method of the program does the I/O
@@ -32,6 +34,7 @@ def main():
         tag : int = 32 - (index_bits + offset_bits)   # the tag in bits
         realSize : int = (nom_size + num_block*((tag + 1)//8))//(2^10)  # solves for the real size in kilobytes
         print(nom_size,words_per_block, mapping_policy, bytesPerBlock, num_block, index_bits, offset_bits, tag, realSize)
+
 
     if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
         promptMode()
