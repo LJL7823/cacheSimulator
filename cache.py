@@ -1,11 +1,13 @@
-# This file uses the byte address inputs to find the word addresses and spot in cache
+'''
+    This file uses the byte address inputs to find the word addresses and spot in cache
+    based on the number of ways. It also populates the cache memory with the data and it's place in memory.
+'''
 
-# cache memory 
-# data type is a dictionary with the key = int, value = list[N]
-# key is the block address, value is a list of N elements
+# cache memory to store the data and it's place in memory
 cache = [dict(int, [])]
 
-''' populate the cache memory with the data and it's place in memory
+''' 
+    populate the cache memory with the data and it's place in memory
     cache = dict() with key = int, value = data
     @vars
     data = dict() with key = block_address value = word_addresses
@@ -19,7 +21,8 @@ def populateCache(data, spot):
     cache[spot] = data
     return cache
 
-''' find the word addresses in cache based on the number of ways
+''' 
+    find the word addresses in cache based on the number of ways
     @vars
     block_address = the block address
     word_address = the word address
@@ -27,7 +30,8 @@ def populateCache(data, spot):
     N = the number of ways
 
     @return
-    word_addresses = the word addresses in cache based on the number of ways'''
+    word_addresses = the word addresses in cache based on the number of ways
+'''
 def findWordAddresses(block_address, word_address, words_per_block, N):
 
     # find the block address
@@ -63,14 +67,16 @@ def findWordAddresses(block_address, word_address, words_per_block, N):
             print("Number of ways not supported")
     return word_addresses
 
-''' find the spot in cache based on the number of ways
+''' 
+    find the spot in cache based on the number of ways
     @vars
     block_address = the block address
     num_blocks = the number of blocks in cache
     N = the number of ways
 
     @return
-    spot = the spot in cache to place the data'''
+    spot = the spot in cache to place the data
+    '''
 def findSpotInCache(block_address, num_blocks, N):
 
     # get the spot in cache based on the number of ways
