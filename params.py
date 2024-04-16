@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class parameterClass:
+    """Just read the class file bruh"""
     nom_size : int
     words_per_block : int
     mapping_policy : str
