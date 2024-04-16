@@ -41,9 +41,7 @@ def populateCache(data, spot):
     global hit, miss
 
     # if the data is already in the cache, don't add it again
-    # loop through all the data in the cache
     for i in range(len(cache[spot])):
-        # if the data is already in the cache, don't add it again
         if cache[spot][i] == data:
             hit += 1
             return cache
