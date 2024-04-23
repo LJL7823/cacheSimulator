@@ -7,6 +7,7 @@
 cache = [[]]
 hit = 0
 miss = 0
+first = True
 
 def initCache(num_blocks, N):
     ''' 
@@ -38,7 +39,7 @@ def populateCache(data, spot):
         cache = dict() with key = int, value = data
     '''
     global cache
-    global hit, miss
+    global hit, miss, first
 
     # if the data is already in the cache, don't add it again
     # otherwise, add the data to the cache
@@ -50,9 +51,15 @@ def populateCache(data, spot):
             cache[spot][i] = data
             miss += 1
             return cache
+        
+    if first:
+        cache[spot][len(cache[spot]) - 1] = data
+        first = False
+        miss += 1
+        return cache
     
-    temp = cache[spot].pop(len(cache[spot]-1))
-    cache[spot][0] = data
+    temp = cache[spot].pop(0)
+    cache[spot][len(cache[spot])-1] = data
     cache[spot].append(temp)
     miss += 1
     return cache
