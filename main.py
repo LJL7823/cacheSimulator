@@ -3,7 +3,8 @@ from gettext import find
 import time
 import sys
 import math as m
-from cache import *
+import cache
+from cache import initCache
 from params import parameterClass
 
 def main():
@@ -59,10 +60,14 @@ def main():
 
 # Function for Prompt mode
 def promptMode():
+    initCache(parameterClass.num_block, parameterClass.theN)
     while (True):
-        temp = input("Input a word: ")
+        temp = input("Input a word")
         try:
-            int(temp)
+            currentData, block_address = cache.findWordAddresses(temp, parameterClass.words_per_block, parameterClass.theN)
+            print(cache.data)
+            index = cache.findIndex(currentData, block_address, parameterClass.theN)
+            cache.populateCache(currentData, index)
             ## call program
         except ValueError:
             sys.stdout.write("Exiting Program...")
