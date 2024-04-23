@@ -65,7 +65,7 @@ def promptMode(clss : parameterClass ):
         temp = int(input("Input a word"))
         try:
             currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
-            print(cache.cache)
+            # print(cache.cache)
             index = cache.findIndex(block_address, clss.num_block, clss.theN)
             cache.populateCache(currentData, index)
             ## call program
