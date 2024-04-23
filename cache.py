@@ -50,10 +50,10 @@ def populateCache(data, spot):
             cache[spot][i] = data
             miss += 1
             return cache
-        else:
-            cache[spot][0] = data
-            miss += 1
-            return cache
+        
+    cache[spot][0] = data
+    miss += 1
+    return cache
 
 
 def findWordAddresses(word_address, words_per_block, N):
