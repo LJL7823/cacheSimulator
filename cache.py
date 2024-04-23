@@ -81,27 +81,27 @@ def findWordAddresses(word_address, words_per_block, N):
     
     match N:
         case 1:
-            word_addresses = [block_address]
+            word_addresses = [word_address]
         case 2:
-            if block_address % 2 == 0:
-                word_addresses = [block_address, block_address + 1]
+            if word_address % 2 == 0:
+                word_addresses = [word_address, word_address + 1]
             else:
-                word_addresses = [block_address - 1, block_address]
+                word_addresses = [word_address - 1, word_address]
         case 4:
-            if block_address % 2 == 0:
-                word_addresses = [block_address, block_address + 1, block_address + 2, block_address + 3]
+            if word_address % 2 == 0:
+                word_addresses = [word_address, word_address + 1, word_address + 2, word_address + 3]
             else:
-                word_addresses = [block_address - 1, block_address, block_address + 1, block_address + 2]
+                word_addresses = [word_address - 1, word_address, word_address + 1, word_address + 2]
         case 8:
-            if block_address % 2 == 0:
-                word_addresses = [block_address, block_address + 1, block_address + 2, block_address + 3, block_address + 4, block_address + 5, block_address + 6, block_address + 7]
+            if word_address % 2 == 0:
+                word_addresses = [word_address, word_address + 1, word_address + 2, word_address + 3, word_address + 4, word_address + 5, word_address + 6, word_address + 7]
             else:
-                word_addresses = [block_address - 1, block_address, block_address + 1, block_address + 2, block_address + 3, block_address + 4, block_address + 5, block_address + 6]
+                word_addresses = [word_address - 1, word_address, word_address + 1, word_address + 2, word_address + 3, word_address + 4, word_address + 5, word_address + 6]
         case 16:
-            if block_address % 2 == 0:
-                word_addresses = [block_address, block_address + 1, block_address + 2, block_address + 3, block_address + 4, block_address + 5, block_address + 6, block_address + 7, block_address + 8, block_address + 9, block_address + 10, block_address + 11, block_address + 12, block_address + 13, block_address + 14, block_address + 15]
+            if word_address % 2 == 0:
+                word_addresses = [word_address, word_address + 1, word_address + 2, word_address + 3, word_address + 4, word_address + 5, word_address + 6, word_address + 7, word_address + 8, word_address + 9, word_address + 10, word_address + 11, word_address + 12, word_address + 13, word_address + 14, word_address + 15]
             else:
-                word_addresses = [block_address - 1, block_address, block_address + 1, block_address + 2, block_address + 3, block_address + 4, block_address + 5, block_address + 6, block_address + 7, block_address + 8, block_address + 9, block_address + 10, block_address + 11, block_address + 12, block_address + 13, block_address + 14]
+                word_addresses = [word_address - 1, word_address, word_address + 1, word_address + 2, word_address + 3, word_address + 4, word_address + 5, word_address + 6, word_address + 7, word_address + 8, word_address + 9, word_address + 10, word_address + 11, word_address + 12, word_address + 13, word_address + 14]
         case _:
             print("Number of ways not supported")
 
