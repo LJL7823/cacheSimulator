@@ -16,7 +16,7 @@ class Table:
                                font=('Arial',16,'bold'))
                  
                 self.e.grid(row=i, column=j)
-                self.e.insert(END, lst[i][j])
+                self.e.insert(END, str(lst[i][j]))
  
 # swap with cache the data
 lst = cache
