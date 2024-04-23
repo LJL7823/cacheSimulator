@@ -47,11 +47,13 @@ def populateCache(data, spot):
             hit += 1
             return cache
         elif cache[spot][i] == None:
-            cache[spot].append(data)
+            cache[spot][i] = data
             miss += 1
             return cache
     
+    temp = cache[spot].pop(0)
     cache[spot][0] = data
+    cache[spot].append(temp)
     miss += 1
     return cache
 
