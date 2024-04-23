@@ -17,7 +17,7 @@ def main():
     
     # If the mapping policy is Set-Associative
     if(mapping_policy == 'S' or mapping_policy == 's'):
-        theN : int = int(input("input the number of blocks per set:")) # type: ignore
+        theN : int = int(input("Input the number of blocks per set:")) # type: ignore
         bytesPerBlock : int = 4 * words_per_block # Calculate the number of bytes per block
         num_block : int = (nom_size//bytesPerBlock)   # Calculate the number of blocks 
         num_set : int = (num_block//theN) # Calculate the number of sets
@@ -52,7 +52,7 @@ def main():
     print(our_Cache)
     
     # Ask the user to choose between Prompt mode and Simulate mode
-    if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
+    if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode: "))):
         promptMode()
     else:
         simMode()
@@ -60,7 +60,7 @@ def main():
 # Function for Prompt mode
 def promptMode():
     while (True):
-        temp = input("Input a word")
+        temp = input("Input a word: ")
         try:
             int(temp)
             ## call program
