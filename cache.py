@@ -20,7 +20,7 @@ def initCache(num_blocks, N):
         cache = 2D array rows = num_blocks // N, columns = N
     '''
     global cache
-    cache = [[0 for i in range(N)] for j in range(num_blocks // N)]
+    cache = [[None for i in range(N)] for j in range(num_blocks // N)]
     return cache
 
 def populateCache(data, spot):
@@ -39,24 +39,22 @@ def populateCache(data, spot):
     '''
     global cache
     global hit, miss
-    
+    cache = [[]]
+
     # if the data is already in the cache, don't add it again
     for i in range(len(cache[spot])):
-        try:
-            if cache[spot][i] == data:
-                cache[spot].pop(i)
-                cache[spot].append(data)
-                hit += 1
-                return cache
-        except:
-            # check if the spot is full, if so replace the least recently used data
-            if len(cache[spot]) == 0:
-                cache[spot].pop(0)
-                cache[spot].append(data)
-            else:
-                cache[spot].append(data)
-            miss += 1
+        if cache[spot][i] == data:
+            cache[spot][i] = data
+            hit += 1
             return cache
+        
+    # check if the spot is full, if so replace the least recently used data
+    if len(cache[spot]) == 0:
+        cache[spot][0] = data
+    else:
+        cache[spot].append(data)
+    miss += 1
+    return cache
 
 
 def findWordAddresses(word_address, words_per_block, N):
