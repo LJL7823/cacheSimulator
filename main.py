@@ -54,21 +54,22 @@ def main():
     
     # Ask the user to choose between Prompt mode and Simulate mode
     if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
-        promptMode()
+        promptMode(our_Cache)
     else:
         simMode()
 
 # Function for Prompt mode
-def promptMode():
-    initCache(parameterClass.num_block, parameterClass.theN)
+def promptMode(clss : parameterClass ):
+    initCache(clss.num_block, clss.theN)
     while (True):
         temp = int(input("Input a word address"))
         try:
-            currentData, block_address = cache.findWordAddresses(temp, parameterClass.words_per_block, parameterClass.theN)
-            print(cache.data)
-            index = cache.findIndex(currentData, block_address, parameterClass.theN)
+            currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
+            print(cache.cache)
+            index = cache.findIndex(currentData, block_address, clss.theN)
             cache.populateCache(currentData, index)
             ## call program
+            print(cache.data)
         except ValueError:
             sys.stdout.write("Exiting Program...")
             print("\nThank You :)")
