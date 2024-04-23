@@ -53,13 +53,8 @@ def main():
     print(our_Cache)
     
     # Ask the user to choose between Prompt mode and Simulate mode
-<<<<<<< HEAD
-    if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode"))):
-        promptMode(our_Cache)
-=======
     if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode: "))):
-        promptMode()
->>>>>>> dfa59719134bb44e50832e0a5f03666350023a4f
+        promptMode(our_Cache)
     else:
         simMode()
 
@@ -71,7 +66,7 @@ def promptMode(clss : parameterClass ):
         try:
             currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
             print(cache.cache)
-            index = cache.findIndex(currentData, block_address, clss.theN)
+            index = cache.findIndex(block_address, clss.num_block, clss.theN)
             cache.populateCache(currentData, index)
             ## call program
             print(cache.data)
