@@ -51,7 +51,7 @@ def populateCache(data, spot):
     # check if the spot is full, if so replace the least recently used data
     if len(cache[spot]) == 0:
         cache[spot].pop(0)
-        cache[spot][0] = data
+        cache[spot] = data
     else:
         cache[spot] = data
     miss += 1
