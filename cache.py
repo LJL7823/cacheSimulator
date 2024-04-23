@@ -59,7 +59,7 @@ def populateCache(data, spot):
     return cache
 
 
-def findWordAddresses(block_address, word_address, words_per_block, N):
+def findWordAddresses(word_address, words_per_block, N):
     ''' 
         find the word addresses in cache based on the number of ways
         @vars
@@ -108,7 +108,7 @@ def findWordAddresses(block_address, word_address, words_per_block, N):
     if data.get(block_address) is None:
         data = {block_address: word_addresses}
 
-    return data
+    return data, block_address
 
 
 def findIndex(block_address, num_blocks, N):
