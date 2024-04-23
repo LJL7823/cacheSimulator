@@ -39,23 +39,24 @@ def populateCache(data, spot):
     '''
     global cache
     global hit, miss
-
+    
     # if the data is already in the cache, don't add it again
     for i in range(len(cache[spot])):
-        if cache[spot][i] == data:
-            cache[spot].pop(i)
-            cache[spot] = data
-            hit += 1
+        try:
+            if cache[spot][i] == data:
+                cache[spot].pop(i)
+                cache[spot].append(data)
+                hit += 1
+                return cache
+        except:
+            # check if the spot is full, if so replace the least recently used data
+            if len(cache[spot]) == 0:
+                cache[spot].pop(0)
+                cache[spot].append(data)
+            else:
+                cache[spot].append(data)
+            miss += 1
             return cache
-    
-    # check if the spot is full, if so replace the least recently used data
-    if len(cache[spot]) == 0:
-        cache[spot].pop(0)
-        cache[spot] = data
-    else:
-        cache[spot] = data
-    miss += 1
-    return cache
 
 
 def findWordAddresses(word_address, words_per_block, N):
