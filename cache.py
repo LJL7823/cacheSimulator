@@ -51,7 +51,7 @@ def populateCache(data, spot):
             miss += 1
             return cache
     
-    temp = cache[spot].pop(len-1)
+    temp = cache[spot].pop(len(cache[spot]-1))
     cache[spot][0] = data
     cache[spot].append(temp)
     miss += 1
