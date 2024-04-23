@@ -44,18 +44,17 @@ def populateCache(data, spot):
     for i in range(len(cache[spot])):
         if cache[spot][i] == data:
             cache[spot].pop(i)
-            cache[spot].append(data)
+            cache[spot] = data
             hit += 1
             return cache
-        else:
-            miss += 1
     
     # check if the spot is full, if so replace the least recently used data
     if len(cache[spot]) == 0:
         cache[spot].pop(0)
         cache[spot][0] = data
     else:
-        cache[spot].append(data)
+        cache[spot] = data
+    miss += 1
     return cache
 
 
