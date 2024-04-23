@@ -69,7 +69,7 @@ def promptMode(clss : parameterClass ):
             index = cache.findIndex(block_address, clss.num_block, clss.theN)
             cache.populateCache(currentData, index)
             ## call program
-            print(cache.data)
+            print(cache.cache)
         except ValueError:
             sys.stdout.write("Exiting Program...")
             print("\nThank You :)")
