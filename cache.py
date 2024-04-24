@@ -24,13 +24,14 @@ def initCache(num_blocks, N):
     cache = [[None for i in range(N)] for j in range(num_blocks // N)]
     return cache
 
-def populateCache(data, spot):
+def populateCache(data, spot, num_ways, mp):
     ''' 
         populate the cache memory with the data and it's place in memory
         cache = dict() with key = int, value = data
         @vars
         data = dict() with key = block_address value = word_addresses[]
         spot = spot in memory to place the data
+        num_ways = the number of ways in the cache
 
         if the spot is full, replaces the least recently used data in cache
         with the new data
@@ -43,26 +44,42 @@ def populateCache(data, spot):
 
     # if the data is already in the cache, don't add it again
     # otherwise, add the data to the cache
-    for i in range(len(cache[spot])):
-        if cache[spot][i] == data:
+    print(mp)
+    if mp == 'd' or mp == 'D':
+        if cache[spot][0] == data:
             hit += 1
             return cache
-        elif cache[spot][i] == None:
-            cache[spot][i] = data
+        elif cache[spot][0] == None:
+            cache[spot][0] = data
+            miss += 1
+            return cache
+        else:
+            temp = cache[spot].pop(0)
+            #cache[spot][num_ways-1] = 
+            cache[spot].append(data)
+            miss += 1
+            return cache
+    else:        
+        for i in range(num_ways):
+            if cache[spot][i] == data:
+                hit += 1
+                return cache
+            elif cache[spot][i] == None:
+                cache[spot][i] = data
+                miss += 1
+                return cache
+            
+        if first:
+            cache[spot][0] = data
+            first = False
             miss += 1
             return cache
         
-    if first:
-        cache[spot][0] = data
-        first = False
+        temp = cache[spot].pop(0)
+        #cache[spot][num_ways-1] = 
+        cache[spot].append(data)
         miss += 1
         return cache
-    
-    temp = cache[spot].pop(0)
-    cache[spot][len(cache[spot])-1] = data
-    cache[spot].append(temp)
-    miss += 1
-    return cache
 
 
 def findWordAddresses(word_address, words_per_block, N):
@@ -85,7 +102,7 @@ def findWordAddresses(word_address, words_per_block, N):
     # get the word addresses in cache based on the number of ways
     word_addresses = []
     
-    match N:
+    match words_per_block:
         case 1:
             word_addresses = [word_address]
         case 2:
@@ -136,13 +153,13 @@ def findIndex(block_address, num_blocks, N):
         case 1:
             spot = block_address % num_blocks
         case 2:
-            spot = block_address % (num_blocks // 2)
+            spot = (block_address // 2) % num_blocks
         case 4:
-            spot = block_address % (num_blocks // 4)
+            spot = (block_address // 4) % num_blocks
         case 8:
-            spot = block_address % (num_blocks // 8)
+            spot = (block_address // 8) % num_blocks
         case 16:
-            spot = block_address % (num_blocks // 16)
+            spot = (block_address // 16) % num_blocks
         case _:
             print("Number of ways not supported")
     return spot

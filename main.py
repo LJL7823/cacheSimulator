@@ -31,7 +31,7 @@ def main():
         # Create an instance of parameterClass with the calculated parameters
         our_Cache = parameterClass( nom_size, words_per_block, \
                                    mapping_policy, theN, bytesPerBlock, num_block,\
-                                       num_block, num_set, index_bits, offset_bits, tag,\
+                                        num_set, index_bits, offset_bits, tag,\
                                            stat, realSize)
         print(nom_size,words_per_block, mapping_policy, num_set)
     else:
@@ -66,8 +66,8 @@ def promptMode(clss : parameterClass ):
         try:
             currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
             # print(cache.cache)
-            index = cache.findIndex(block_address, clss.num_block, clss.theN)
-            cache.populateCache(currentData, index)
+            index = cache.findIndex(block_address, clss.num_set, clss.theN)
+            cache.populateCache(currentData, index, clss.num_set, clss.mapping_policy)
             ## call program
             print(cache.cache)
         except ValueError:
