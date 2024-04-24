@@ -53,7 +53,7 @@ def populateCache(data, spot):
             return cache
         
     if first:
-        cache[spot][len(cache[spot]) - 1] = data
+        cache[spot][0] = data
         first = False
         miss += 1
         return cache
