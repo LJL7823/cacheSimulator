@@ -6,6 +6,7 @@ import math as m
 import cache
 from cache import initCache
 from params import parameterClass
+import random
 
 def main():
     """Main Method of the program does the I/O"""
@@ -56,7 +57,7 @@ def main():
     if(1==int(input("Input '1' for Prompt mode, '2' to do simulate mode: "))):
         promptMode(our_Cache)
     else:
-        simMode()
+        simMode(our_Cache)
 
 # Function for Prompt mode
 def promptMode(clss : parameterClass ):
@@ -76,8 +77,22 @@ def promptMode(clss : parameterClass ):
             exit(99)
     
 # Function for Simulate mode
-def simMode():
-    return 0
+def simMode(clss : parameterClass):
+    x = int(input("Input max number of simulations tested: "))
+    y = int(input("Input the highest word address you would like tested: "))
+    initCache(clss.num_block, clss.theN)
+    for i in range(x):
+        try:
+            temp = random.randint(0,y)
+            currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
+            print(cache.cache)
+            index = cache.findIndex(block_address, clss.num_block, clss.theN)
+            cache.populateCache(currentData, index, clss.num_set, clss.mapping_policy)
+            print(cache.cache)
+        except ValueError:
+            sys.stdout.write("Exiting Program...")
+            print("\nThank You :)")
+            exit(99)
 
 # Call the main function
 if __name__ == '__main__':
