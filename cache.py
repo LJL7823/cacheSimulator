@@ -44,7 +44,6 @@ def populateCache(data, spot, num_ways, mp):
 
     # if the data is already in the cache, don't add it again
     # otherwise, add the data to the cache
-    print(mp)
     if mp == 'd' or mp == 'D':
         if cache[spot][0] == data:
             hit += 1
@@ -75,7 +74,7 @@ def populateCache(data, spot, num_ways, mp):
             miss += 1
             return cache
         
-        temp = cache[spot].pop(0)
+        cache[spot].pop(0)
         #cache[spot][num_ways-1] = 
         cache[spot].append(data)
         miss += 1
@@ -134,12 +133,12 @@ def findWordAddresses(word_address, words_per_block, N):
     return data, block_address
 
 
-def findIndex(block_address, num_blocks, N):
+def findIndex(block_address, num_sets, N):
     ''' 
         find the spot in cache based on the number of ways
         @vars
         block_address = the block address
-        num_blocks = the number of blocks in cache
+        num_sets = the number of blocks in cache
         N = the number of ways
 
         @return
@@ -151,15 +150,15 @@ def findIndex(block_address, num_blocks, N):
 
     match N:
         case 1:
-            spot = block_address % num_blocks
+            spot = block_address % num_sets
         case 2:
-            spot = (block_address // 2) % num_blocks
+            spot = (block_address // 2) % num_sets
         case 4:
-            spot = (block_address // 4) % num_blocks
+            spot = (block_address // 4) % num_sets
         case 8:
-            spot = (block_address // 8) % num_blocks
+            spot = (block_address // 8) % num_sets
         case 16:
-            spot = (block_address // 16) % num_blocks
+            spot = (block_address // 16) % num_sets
         case _:
             print("Number of ways not supported")
     return spot

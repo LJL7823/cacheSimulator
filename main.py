@@ -63,18 +63,25 @@ def main():
 def promptMode(clss : parameterClass ):
     initCache(clss.num_block, clss.theN)
     while (True):
-        temp = int(input("Input a word: "))
+        doubletemp = 0
         try:
+            doubletemp = input("Input a word: ")
+            temp = int(doubletemp)
+        except ValueError:
+            match doubletemp:
+                case "clear":
+                    initCache(clss.num_block, clss.theN)
+                case _:
+                    sys.stdout.write("Exiting Program...")
+                    print("\nThank You :)")
+                    exit(99)
+        else:
             currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
             # print(cache.cache)
             index = cache.findIndex(block_address, clss.num_set, clss.theN)
-            cache.populateCache(currentData, index, clss.num_set, clss.mapping_policy)
+            cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
             ## call program
             print(cache.cache)
-        except ValueError:
-            sys.stdout.write("Exiting Program...")
-            print("\nThank You :)")
-            exit(99)
     
 # Function for Simulate mode
 def simMode(clss : parameterClass):
@@ -82,17 +89,14 @@ def simMode(clss : parameterClass):
     y = int(input("Input the highest word address you would like tested: "))
     initCache(clss.num_block, clss.theN)
     for i in range(x):
-        try:
-            temp = random.randint(0,y)
-            currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
-            print(cache.cache)
-            index = cache.findIndex(block_address, clss.num_block, clss.theN)
-            cache.populateCache(currentData, index, clss.num_set, clss.mapping_policy)
-            print(cache.cache)
-        except ValueError:
-            sys.stdout.write("Exiting Program...")
-            print("\nThank You :)")
-            exit(99)
+        temp = int(random.randint(1,y))
+        currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
+        index = cache.findIndex(block_address, clss.num_set, clss.theN)
+        cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
+        print(i)
+        print("Hits: %d", cache.hit)
+        print("Misses: %d", cache.miss)
+        print(cache.cache)
 
 # Call the main function
 if __name__ == '__main__':
