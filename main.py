@@ -7,6 +7,9 @@ import cache
 from cache import initCache
 from params import parameterClass
 import random
+import GUI as g
+import tkinter as tk
+from tkinter import ttk 
 
 def main():
     """Main Method of the program does the I/O"""
@@ -62,6 +65,7 @@ def main():
 # Function for Prompt mode
 def promptMode(clss : parameterClass ):
     initCache(clss.num_block, clss.theN)
+    root = g.create_table_gui(cache.cache)
     while (True):
         doubletemp = 0
         try:
@@ -71,6 +75,7 @@ def promptMode(clss : parameterClass ):
             match doubletemp:
                 case "clear":
                     initCache(clss.num_block, clss.theN)
+                    g.create_table_gui(cache.cache)
                 case _:
                     sys.stdout.write("Exiting Program...")
                     print("\nThank You :)")
@@ -82,21 +87,59 @@ def promptMode(clss : parameterClass ):
             cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
             ## call program
             print(cache.cache)
+        finally:
+            root.destroy() 
+            root.mainloop()
+            root = g.create_table_gui(cache.cache)
     
 # Function for Simulate mode
 def simMode(clss : parameterClass):
     x = int(input("Input max number of simulations tested: "))
     y = int(input("Input the highest word address you would like tested: "))
     initCache(clss.num_block, clss.theN)
-    for i in range(x):
-        temp = int(random.randint(1,y))
-        currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
-        index = cache.findIndex(block_address, clss.num_set, clss.theN)
-        cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
-        print(i)
-        print("Hits: %d", cache.hit)
-        print("Misses: %d", cache.miss)
-        print(cache.cache)
+    root = g.create_table_gui(cache.cache)
+    mode = input("Imput F for fibbinaci sequence or R for random")
+    verbose: bool = True if (input("Verbose? (T/F)")=='T') else False
+    match mode:
+        case 'F'|'f':
+            for i in range(x):
+                temp = int(fibo(i))
+                currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
+                index = cache.findIndex(block_address, clss.num_set, clss.theN)
+                cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
+                print(i)
+                print("Hits: %d", cache.hit)
+                print("Misses: %d", cache.miss)
+                print(cache.cache) if (verbose) else 1+1
+                root.destroy()
+                root = g.create_table_gui(cache.cache)
+        case 'r' | 'R' |_:
+            for i in range(x):
+                temp = int(random.randint(1,y))
+                currentData, block_address = cache.findWordAddresses(temp, clss.words_per_block, clss.theN)
+                index = cache.findIndex(block_address, clss.num_set, clss.theN)
+                cache.populateCache(currentData, index, clss.theN, clss.mapping_policy)
+                print(i)
+                print("Hits: %d", cache.hit)
+                print("Misses: %d", cache.miss)
+                print(cache.cache) if (verbose) else 1+1
+                root.destroy()
+                root = g.create_table_gui(cache.cache)
+    input("Press enter to end")
+    root.destroy() 
+    root.mainloop()
+    root = g.create_table_gui(cache.cache)
+
+
+def fibo(n):
+    fib_sequence = [0, 1]  # Initialize the sequence with the first two Fibonacci numbers
+
+    # Generate Fibonacci numbers up to the nth number
+    for i in range(2, n):
+        fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
+
+    # Return the largest value in the sequence
+    return max(fib_sequence)
 
 # Call the main function
 if __name__ == '__main__':
